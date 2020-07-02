@@ -1,0 +1,45 @@
+I"�	<p>这篇文章用来记录一下如何写一个<a href="https://dorajs.com/">Dora.js</a>的插件。</p>
+
+<p>目标是做一个视频类的插件，<a href="http://nfmovies.com/">奈菲影视</a> 这个网站还可以，就爬取这个网站的视频作为视频源。</p>
+
+<h1 id="创建扩展">创建扩展</h1>
+
+<p>依次输入名称”奈菲影视“，作者昵称”石榴“，名称是自动生成的，最后点创建就好了。</p>
+
+<p><img src="https://wx2.sbimg.cn/2020/07/02/2aFUo.jpg" alt="" /></p>
+
+<p>创建完成之后，会进入插件目录，打开package.json，其中”icon“是设置应用图标的，这个选项可用于更换应用图标。还有一个components文件夹，点进去之后，有一个index.js，这是扩展的起始页，再新建list.js,  detail.js,  player.js。index.js是一个分类展示页，根据<a href="http://nfmovies.com/">奈菲影视</a>首页，大概分为电影、电视剧、综艺、动漫四类。list.js用于展示某一类视频下面，具体都有哪些视频。detail.js给出某个具体视频的详细信息，player.js用于视频播放。</p>
+
+<p>所以大概的思路就是，index页面给出不同的分类，用一个type变量表示其类别。路由的时候，把type值传给list.js，list.js页面根据type值合成目标类别视频链接，获取该链接下所有的视频信息，并且展示出来。通过点击展示的信息，将视频网页url路由传给detail.js。detail.js解析该视频网页下视频的不同版本，不同集数等等。然后，通过点击播放按钮，把某一个最最具体的视频网页传递给player.js。player.js在该网页上解析出视频的真实m3u8播放链接，传递给播放器播放。</p>
+
+<h1 id="代码实现">代码实现</h1>
+
+<p>index.js很简单，弄4个图标和相应的说明就好了。</p>
+
+<h2 id="listjs">list.js</h2>
+
+<p>再来解决list.js，先康康奈菲影视不同类别视频的链接长什么样纸：</p>
+
+<hr />
+<ol>
+  <li>
+    <p>电影 https://www.nfmovies.com/list/?1.html</p>
+  </li>
+  <li>
+    <p>电视剧 https://www.nfmovies.com/list/?2.html</p>
+  </li>
+  <li>
+    <p>综艺 https://www.nfmovies.com/list/?3.html</p>
+  </li>
+  <li>
+    <p>动漫 https://www.nfmovies.com/list/?4.html</p>
+  </li>
+</ol>
+
+<hr />
+
+<p>很明显，4个链接形式及其相似，不同类别的视频链接只是问号后面的数字不同而已。下面，以电影类视频链接为例，分析如何提取网页中的信息。</p>
+
+<p>电影类视频一页下面共48张图片，</p>
+
+:ET

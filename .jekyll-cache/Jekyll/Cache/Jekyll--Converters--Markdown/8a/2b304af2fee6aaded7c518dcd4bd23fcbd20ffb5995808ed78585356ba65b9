@@ -1,0 +1,12 @@
+I"b<p>这篇文章用来记录一下如何写一个<a href="https://dorajs.com/">Dora.js</a>的插件。</p>
+
+<p>目标是做一个视频类的插件，<a href="http://nfmovies.com/">奈菲影视</a> 这个网站还可以，就爬取这个网站的视频作为视频源。</p>
+
+<h2 id="创建扩展">创建扩展</h2>
+
+<p>依次输入名称”奈菲影视“，作者昵称”石榴“，名称是自动生成的，最后点创建就好了。</p>
+
+<p><img src="https://wx2.sbimg.cn/2020/07/02/2aFUo.jpg" alt="" /></p>
+
+<p>创建完成之后，会进入插件目录，打开package.json，其中”icon“是设置应用图标的，这个选项可用于更换应用图标。还有一个components文件夹，点进去之后，有一个index.js，这是扩展的起始页，再新建list.js,  detail.js,  player.js。index.js是一个分类展示页，根据<a href="http://nfmovies.com/">奈菲影视</a>首页，大概分为电影、电视剧、综艺、动漫四类。list.js用于展示某一类视频下面，具体都有哪些视频。detail.js给出某个具体视频的详细信息，player.js用于视频播放。</p>
+:ET
